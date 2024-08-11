@@ -2,27 +2,34 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BannerSlider;
+use App\Models\BrandJourney;
+use App\Models\HomeAbout;
+use App\Models\Milestone;
+use App\Models\NewsNoticeSection;
+use App\Models\OurCommitment;
 use App\Models\Section;
+use App\Models\TestimonialSection;
 
 class IndexController extends Controller
 {
-    public function index()
-    {
-        // Attempt to fetch the section with ID 1
-        $testimonials = Section::find(1); // Using find() to return null if not found
+    // public function index()
+    // {
+    //     // Attempt to fetch the section with ID 1
+    //     $testimonials = Section::find(1); // Using find() to return null if not found
+    //     // $logo = Logo::find(1);
+    //     // Handle case where section might not be found
+    //     if (! $testimonials) {
+    //         // Optionally, you can set default values or handle the case as needed
+    //         return redirect()->route('home')->with('error', 'Section not found.');
+    //     }
 
-        // Handle case where section might not be found
-        if (! $testimonials) {
-            // Optionally, you can set default values or handle the case as needed
-            return redirect()->route('home')->with('error', 'Section not found.');
-        }
+    //     // Set the title from the retrieved section
+    //     $testimonial_title = $testimonials->title;
 
-        // Set the title from the retrieved section
-        $testimonial_title = $testimonials->title;
-
-        // Pass the data to the view
-        return view('dynamic.dynamic_index', compact('testimonials', 'testimonial_title'));
-    }
+    //     // Pass the data to the view
+    //     return view('dynamic.dynamic_index', compact('testimonials', 'testimonial_title'));
+    // }
 
     // public function index()
     // {
@@ -47,4 +54,17 @@ class IndexController extends Controller
 
     //     return view('home', compact('banners', 'about', 'brands', 'testimonials', 'cta_title', 'cta_description', 'cta_link', 'commitments_title', 'commitments_description', 'commitments', 'honors', 'news_title', 'news_description', 'news', 'view_more_link', 'subscribe_title', 'subscribe_description', 'subscribe_link'));
     // }
+
+    public function index()
+    {
+        $banners = BannerSlider::all();
+        $about = HomeAbout::first(); // Assuming there's only one record for about section
+        $brands = BrandJourney::all();
+        $testimonials = TestimonialSection::all();
+        $commitments = OurCommitment::all();
+        $milestones = Milestone::all();
+        $news = NewsNoticeSection::all();
+
+        return view('dynamic.dynamic_index', compact('banners', 'about', 'brands', 'testimonials', 'commitments', 'milestones', 'news'));
+    }
 }

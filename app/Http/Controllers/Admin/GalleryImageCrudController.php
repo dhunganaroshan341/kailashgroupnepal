@@ -52,6 +52,7 @@ class GalleryImageCrudController extends CrudController
         //     ->entity('gallery')
         //     ->model('App\Models\Gallery')
         //     ->attribute('id')->label('Galleries');
+        CRUD::column('image_path')->type('image')->label('Images');
     }
 
     /**
@@ -80,12 +81,12 @@ class GalleryImageCrudController extends CrudController
         CRUD::field('name')->type('text')->label('Name');
 
         CRUD::field('image_path')
-            ->type('upload')
-            ->label('Image Path')
+            ->type('upload_multiple')
+            ->label('Upload Images')
             ->upload() // Specify that it should handle file uploads
             ->withFiles([
                 'disk' => 'public', // The disk where the file will be stored
-                'path' => 'images', // The path inside the disk where the file will be stored
+                'path' => 'gallery', // The path inside the disk where the file will be stored
             ]);
 
         CRUD::field('description')->type('textarea')->label('Description');

@@ -18,7 +18,7 @@
         <nav>
             <div class="navbar-wrapper">
                 <div class="logo">
-                    <a href="/index.html"><img src="./img/kailashgroupnepal_logo1.jpg"></a>
+                    <a href="/"><img src=" ./img/kailashgroupnepal_logo1.jpg " alt = "kailash-group"></a>
                 </div>
                 <div class="menu-nav-all">
                     <div class="top-nav-wrapper">

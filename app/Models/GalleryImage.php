@@ -9,6 +9,8 @@ class GalleryImage extends Model
 {
     use CrudTrait;
 
+    protected $table = 'gallery_images';
+
     protected $fillable = [
         'gallery_id',
         'name',          // Updated column name

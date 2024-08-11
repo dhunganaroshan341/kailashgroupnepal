@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('banner_slider', function (Blueprint $table) {
+        Schema::create('banner_sliders', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('image');
-            // $table->unsignedBigInteger('page_id');
-            // $table->foreign('page_id')->references('id')->on('pages');
-
+            $table->string('title')->nullable();
+            $table->string('description')->nullable();
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('banner_slider');
+        Schema::dropIfExists('banner_sliders');
     }
 };

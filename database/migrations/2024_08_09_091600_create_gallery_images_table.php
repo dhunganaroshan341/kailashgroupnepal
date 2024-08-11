@@ -12,7 +12,7 @@ class CreateGalleryImagesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('gallery_id');
             $table->string('name'); // Updated column name
-            $table->string('image_path'); // Updated column name
+            $table->json('image_path')->nullable(); // Updated column name
             $table->string('description')->nullable();
             $table->timestamps();
 

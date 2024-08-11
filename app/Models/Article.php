@@ -13,6 +13,7 @@ class Article extends Model
         'title',
         'slug',
         'content',
+        'image_path',
         'featured_image',
     ];
 
@@ -24,5 +25,10 @@ class Article extends Model
     public function images()
     {
         return $this->hasMany(ArticleImage::class);
+    }
+
+    public function newNoticeSections()
+    {
+        return $this->hasMany(NewsNoticeSection::class, 'news_id');
     }
 }

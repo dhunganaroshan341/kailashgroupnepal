@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Gallery;
+use App\Models\GalleryImage;
 use Illuminate\Http\Request;
 
 class GalleryController extends Controller
@@ -11,6 +13,9 @@ class GalleryController extends Controller
      */
     public function index()
     {
+        $galleries = Gallery::all();
+
+        return view('dynamic.dynamic_gallery_lists', compact('galleries'));
         //
     }
 
@@ -33,9 +38,20 @@ class GalleryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        // Find the gallery by ID
+        $gallery = Gallery::findOrFail($id);
+
+        // Retrieve gallery images associated with the gallery
+        $images = GalleryImage::where('gallery_id', $id)->get();
+
+        // Extract and decode the image paths from the images
+        $imagePathsJson = $images->pluck('image_path')->first(); // Get the JSON string
+        $imagePaths = json_decode($imagePathsJson, true); // Decode the JSON string
+
+        // Pass the gallery and image paths to the view
+        return view('dynamic.dynamic_gallery_show', compact('gallery', 'imagePaths'));
     }
 
     /**

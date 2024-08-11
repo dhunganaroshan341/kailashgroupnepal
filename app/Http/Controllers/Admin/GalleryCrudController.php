@@ -61,6 +61,10 @@ class GalleryCrudController extends CrudController
 
         // Set fields from the database columns
         CRUD::setFromDb();
+        CRUD::field('image_path')->label('Featured Image')->type('upload')->withFiles([
+            'disk' => 'public', // the disk where file will be stored
+            'path' => 'images', // the path inside the disk where file will be stored
+        ]);
 
     }
 

@@ -41,7 +41,7 @@ class BrandCrudController extends CrudController
     protected function setupListOperation()
     {
         CRUD::setFromDb(); // set columns from db columns.
-
+        CRUD::column('logo_path')->type('image')->label('Brand Image');
         /**
          * Columns can be defined using the fluent syntax:
          * - CRUD::column('price')->type('number');
@@ -81,5 +81,8 @@ class BrandCrudController extends CrudController
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
+
     }
+
+    // public function setupShowOperation() {}
 }
