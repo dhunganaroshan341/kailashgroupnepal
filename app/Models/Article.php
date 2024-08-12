@@ -13,7 +13,7 @@ class Article extends Model
         'title',
         'slug',
         'content',
-        'image_path',
+        // 'image_path',
         'featured_image',
     ];
 

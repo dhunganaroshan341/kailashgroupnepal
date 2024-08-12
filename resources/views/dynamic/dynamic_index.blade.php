@@ -417,7 +417,28 @@
             </div>
         </div>
     </section>
-
+    <section class="section-wrapper cta-section">
+        <div class="container">
+            <div class="cta-wrapper">
+                {{-- @foreach ($contacts as $contact) --}}
+                @php
+                    $contact = $contacts->first();
+                @endphp
+                <div class="title-cta">
+                    <h3>{{ $contact->title }}</h3>
+                </div>
+                <div class="pgraph-cta">
+                    <p>{{ $contact->description }}</p>
+                </div>
+                <div class="load-more cta-link-more">
+                    <a href="{{ isset($contact->link) ? $contact->link : ':;javascript' }}">
+                        Contact Here
+                    </a>
+                </div>
+                {{-- @endforeach --}}
+            </div>
+        </div>
+    </section>
     <section class="news-suscribe-section section-wrapper">
         <div class="container">
             <div class="news-suscribe-wrapper">
@@ -432,10 +453,11 @@
                     <div class="suscribe-grid-form">
                         <div class="control">
                             <!-- <label class="label">
-                                                                        your email
-                                                                        <span class="required">*</span>
-                                                                    </label>-->
-                            <input class="input" type="text" placeholder="Your email" id="" name="name">
+                                                                                                                            your email
+                                                                                                                            <span class="required">*</span>
+                                                                                                                        </label>-->
+                            <input class="input" type="text" placeholder="Your email" id=""
+                                name="name">
                         </div>
                         <div class="control-suscribe-btn load-more">
                             <a href="#">Suscribe Here</a>

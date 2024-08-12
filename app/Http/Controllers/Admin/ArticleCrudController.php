@@ -24,6 +24,14 @@ class ArticleCrudController extends CrudController
         CRUD::setModel(\App\Models\Article::class);
         CRUD::setRoute(config('backpack.base.route_prefix').'/article');
         CRUD::setEntityNameStrings('article', 'articles');
+        $this->crud->addColumn([
+            'name' => 'featured_image', // The column name in the database
+            'label' => 'Featured Image', // The label displayed in the CRUD
+            'type' => 'image', // The type of the column
+            'width' => '150px', // Width of the image
+            'height' => '160px', // Height of the image
+            // 'prefix' => 'articles', // Storage prefix if you're using public disk
+        ]);
     }
 
     /**
@@ -38,9 +46,18 @@ class ArticleCrudController extends CrudController
         CRUD::setFromDb(); // set columns from db columns.
 
         // Optionally define columns if needed:
+        $this->crud->addColumn([
+            'name' => 'featured_image', // The column name in the database
+            'label' => 'Featured Image', // The label displayed in the CRUD
+            'type' => 'image', // The type of the column
+            'width' => '50', // Width of the image
+            'height' => '50', // Height of the image
+            // 'prefix' => 'articles', // Storage prefix if you're using public disk
+        ]);
         CRUD::column('title');
         CRUD::column('slug');
         CRUD::column('content');
+
     }
 
     /**

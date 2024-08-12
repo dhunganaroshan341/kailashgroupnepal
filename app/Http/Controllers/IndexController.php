@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\BannerSlider;
 use App\Models\BrandJourney;
+use App\Models\ContactSectionHome;
 use App\Models\HomeAbout;
 use App\Models\Milestone;
 use App\Models\NewsNoticeSection;
@@ -62,9 +63,10 @@ class IndexController extends Controller
         $brands = BrandJourney::all();
         $testimonials = TestimonialSection::all();
         $commitments = OurCommitment::all();
+        $contacts = ContactSectionHome::all();
         $milestones = Milestone::all();
         $news = NewsNoticeSection::all();
 
-        return view('dynamic.dynamic_index', compact('banners', 'about', 'brands', 'testimonials', 'commitments', 'milestones', 'news'));
+        return view('dynamic.dynamic_index', compact('banners', 'about', 'brands', 'testimonials', 'commitments', 'milestones', 'news', 'contacts'));
     }
 }

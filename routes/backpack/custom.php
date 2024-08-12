@@ -41,6 +41,7 @@ Route::group([
     Route::crud('contact-section-home', 'ContactSectionHomeCrudController');
     Route::crud('mile-stone', 'MileStoneCrudController');
     Route::crud('home-about', 'HomeAboutCrudController');
+    Route::crud('contact', 'ContactCrudController');
 }); // this should be the absolute last line of this file
 
 /**
