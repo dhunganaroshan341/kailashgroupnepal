@@ -1,0 +1,67 @@
+name: Deploy Laravel Application
+
+on:
+  push:
+    branches:
+      - main  # Change this to your default branch if needed
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.1'  # Match this with the PHP version in your composer.json
+
+    - name: Install Composer Dependencies
+      run: |
+        composer install --no-dev --optimize-autoloader
+
+    - name: Install Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'  # Ensure Node.js version matches with your project requirements
+
+    - name: Install NPM Dependencies
+      run: npm install
+
+    - name: Build Assets
+      run: npm run production
+
+    - name: Deploy to Server
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
+        SSH_HOST: ${{ secrets.SSH_HOST }}
+        SSH_PORT: ${{ secrets.SSH_PORT }}
+        DB_DATABASE: ${{ secrets.DB_DATABASE }}
+        DB_USERNAME: ${{ secrets.DB_USERNAME }}
+        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+      run: |
+        mkdir -p ~/.ssh
+        echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan -H $SSH_HOST >> ~/.ssh/known_hosts
+        ssh -o StrictHostKeyChecking=no $SSH_USERNAME@$SSH_HOST -p $SSH_PORT << 'EOF'
+          # Navigate to the project directory
+          cd /home/u2672-plecfrb3saey/www/kailashgroupdemo.bivekp18.sg-host.com
+
+          # Pull the latest changes from the repository
+          git pull origin main
+
+          # Install dependencies and build assets
+          composer install --no-dev --optimize-autoloader
+          npm install --production
+          npm run production
+
+          # Run Laravel commands
+          php artisan migrate --force
+          php artisan config:cache
+          php artisan route:cache
+          php artisan view:cache
+        EOF

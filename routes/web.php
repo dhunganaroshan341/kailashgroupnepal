@@ -40,9 +40,9 @@ Route::get('/about-us', function () {
 // Route::get('/gallery', function () {
 //     return view('gallery');
 // });
-Route::get('/gallery-list', function () {
-    return view('gallery-list');
-})->name('gallery-list');
+// Route::get('/gallery-list', function () {
+//     return view('gallery-list');
+// })->name('gallery-list');
 Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
@@ -62,7 +62,7 @@ Route::get('news-notice', [ArticleController::class, 'index'])->name('newsnotice
 // galllery
 
 Route::get('gallery', [GalleryController::class, 'index'])->name('gallery-list');
-Route::get('gallery/{id}', [GalleryController::class, 'show'])->name('gallery.show');
+// Route::get('gallery/{id}', [GalleryController::class, 'show'])->name('gallery.show');
 
 // brands and details
 Route::get('brands', [BrandController::class, 'index'])->name('brands');

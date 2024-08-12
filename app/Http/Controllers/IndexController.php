@@ -6,7 +6,7 @@ use App\Models\BannerSlider;
 use App\Models\BrandJourney;
 use App\Models\ContactSectionHome;
 use App\Models\HomeAbout;
-use App\Models\Milestone;
+use App\Models\MileStone;
 use App\Models\NewsNoticeSection;
 use App\Models\OurCommitment;
 use App\Models\Section;
@@ -64,7 +64,7 @@ class IndexController extends Controller
         $testimonials = TestimonialSection::all();
         $commitments = OurCommitment::all();
         $contacts = ContactSectionHome::all();
-        $milestones = Milestone::all();
+        $milestones = MileStone::all();
         $news = NewsNoticeSection::all();
 
         return view('dynamic.dynamic_index', compact('banners', 'about', 'brands', 'testimonials', 'commitments', 'milestones', 'news', 'contacts'));
