@@ -55,9 +55,9 @@ jobs:
           git pull origin main
 
           # Install dependencies and build assets
-          composer install --no-dev --optimize-autoloader
-          npm install --production
-          npm run production
+          # composer install --no-dev --optimize-autoloader
+          # npm install --production
+          # npm run production
 
           # Run Laravel commands
           php artisan migrate --force
