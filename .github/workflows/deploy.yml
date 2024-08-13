@@ -13,18 +13,6 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Setup SSH
-      env:
-        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-        SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
-        SSH_HOST: ${{ secrets.SSH_HOST }}
-        SSH_PORT: ${{ secrets.SSH_PORT }}
-      run: |
-        mkdir -p ~/.ssh
-        echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan -H $SSH_HOST >> ~/.ssh/known_hosts
-
     - name: Deploy files to server
       env:
         SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
@@ -43,3 +31,4 @@ jobs:
           # Copy new files from public to public_html
           rsync -avz --ignore-existing /www/kailashgroupdemo.bivekp18.sg-host.com/public/ /www/kailashgroupdemo.bivekp18.sg-host.com/public_html/
         EOF
+#
