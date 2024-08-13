@@ -19,16 +19,5 @@ jobs:
         SSH_HOST: ${{ secrets.SSH_HOST }}
         SSH_PORT: ${{ secrets.SSH_PORT }}
       run: |
+        set -x  # Enable debugging
         rsync -avz --exclude '.git' --exclude 'node_modules' --exclude '.github' ./ ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:/www/kailashgroupdemo.bivekp18.sg-host.com
-
-    - name: Copy public files to public_html
-      env:
-        SSH_USERNAME: ${{ secrets.SSH_USERNAME }}
-        SSH_HOST: ${{ secrets.SSH_HOST }}
-        SSH_PORT: ${{ secrets.SSH_PORT }}
-      run: |
-        ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USERNAME }}@$${{ secrets.SSH_HOST }} -p ${{ secrets.SSH_PORT }} << 'EOF'
-          # Copy new files from public to public_html
-          rsync -avz --ignore-existing /www/kailashgroupdemo.bivekp18.sg-host.com/public/ /www/kailashgroupdemo.bivekp18.sg-host.com/public_html/
-        EOF
-#
